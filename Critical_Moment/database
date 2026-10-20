@@ -1,0 +1,87 @@
+IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = N'PhishDB')
+BEGIN
+    CREATE DATABASE [PhishDB]
+    CONTAINMENT = NONE
+    ON  PRIMARY 
+    ( 
+        NAME = N'PhishDB', 
+        FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\PhishDB.mdf', 
+        SIZE = 64MB, 
+        MAXSIZE = UNLIMITED, 
+        FILEGROWTH = 64MB 
+    )
+    LOG ON 
+    ( 
+        NAME = N'PhishDB_log', 
+        FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.MSSQLSERVER\MSSQL\DATA\PhishDB_log.ldf', 
+        SIZE = 64MB, 
+        MAXSIZE = 2048GB, 
+        FILEGROWTH = 64MB 
+    );
+END
+GO
+USE [PhishDB];
+GO
+
+CREATE TABLE dbo.crawldata (
+    id BIGINT NOT NULL,
+    sid BIGINT NULL,
+    url NVARCHAR(MAX) NULL,
+    source NVARCHAR(MAX) NULL,
+    countsource INT NULL,
+    det NVARCHAR(MAX) NULL
+);
+GO
+
+CREATE TABLE dbo.iana (
+    id BIGINT NOT NULL,
+    pat NVARCHAR(MAX) NULL,
+    server NVARCHAR(MAX) NULL,
+    source NVARCHAR(MAX) NULL
+);
+GO
+
+CREATE TABLE dbo.phishdata (
+    id BIGINT NOT NULL,
+    url NVARCHAR(MAX) NULL,
+    ipshish INT NULL,
+    dtime NVARCHAR(150) NULL,
+    ipdphish NVARCHAR(150) NULL,
+    datecreate DATETIME NULL,
+    source NVARCHAR(MAX) NULL,
+    dnsall NVARCHAR(MAX) NULL,
+    dnsr1 NVARCHAR(MAX) NULL,
+    dnsr2 NVARCHAR(MAX) NULL,
+    hasssl INT NULL,
+    ssl1 NVARCHAR(MAX) NULL,
+    ssl2 NVARCHAR(MAX) NULL,
+    ssl3 NVARCHAR(MAX) NULL,
+    countssl INT NULL,
+    countsource INT NULL,
+    countdns INT NULL,
+    checksource INT NULL,
+    screen INT NULL,
+    countscreen INT NULL,
+    countcrawl INT NULL,
+    crawl INT NULL,
+    checkphish INT NULL,
+    NS NVARCHAR(MAX) NULL,
+    dns NVARCHAR(MAX) NULL,
+    countns BIGINT NULL,
+    R1 INT NULL,
+    B1 INT NULL,
+    G1 INT NULL,
+    R2 INT NULL,
+    B2 INT NULL,
+    G2 INT NULL,
+    checkrgb INT NULL,
+    allstring VARCHAR(MAX) NULL,
+    allcstring VARCHAR(MAX) NULL,
+    checkstr INT NULL,
+    checkcstr INT NULL,
+    allfeat VARCHAR(MAX) NULL,
+    checkfeat INT NULL,
+    ranksite NVARCHAR(MAX) NULL,
+    checkrank INT NULL
+);
+GO
